@@ -18,6 +18,7 @@ Uav::Uav() : uav_x(0), uav_y(0), uav_th(0), color(Qt::red), pressed(false)
     setFlag(ItemIsMovable);
     setRotation(QRandomGenerator::global()->bounded(360 * 16));
     setPos(QRandomGenerator::global()->bounded(500), QRandomGenerator::global()->bounded(500));
+    uav_center_wrt_scene = mapToScene(uav_x, uav_y);
 }
 
 Uav::Uav(double a, double b) : uav_x(0), uav_y(0), uav_th(0), color(Qt::red), pressed(false), radius(a), environment_dimension(b)
@@ -25,6 +26,7 @@ Uav::Uav(double a, double b) : uav_x(0), uav_y(0), uav_th(0), color(Qt::red), pr
     setFlag(ItemIsMovable);
     setRotation(QRandomGenerator::global()->bounded(360 * 16));
     setPos(QRandomGenerator::global()->bounded(500), QRandomGenerator::global()->bounded(500));
+    uav_center_wrt_scene = mapToScene(uav_x, uav_y);
 }
 
 QRectF Uav::boundingRect() const
@@ -67,40 +69,6 @@ void Uav::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
       painter->setBrush(brush);
 //      painter->drawPie(footprint_rect, startAngle, endAngle);
       painter->drawEllipse(footprint_rect);
-
-      // draw bresenham's circle
-
-      // scene parameters
-
-
-//          int x = int(this->radius);
-//          int y = int(20 - this->radius);
-//          int err = 0;
-
-//          while (x >= y)
-//          {
-//          painter->drawRect();
-//          putpixel(x0 + x, y0 + y, 7);
-//          putpixel(x0 + y, y0 + x, 7);
-//          putpixel(x0 - y, y0 + x, 7);
-//          putpixel(x0 - x, y0 + y, 7);
-//          putpixel(x0 - x, y0 - y, 7);
-//          putpixel(x0 - y, y0 - x, 7);
-//          putpixel(x0 + y, y0 - x, 7);
-//          putpixel(x0 + x, y0 - y, 7);
-
-//          if (err <= 0)
-//          {
-//              y += 1;
-//              err += 2*y + 1;
-//          }
-
-//          if (err > 0)
-//          {
-//              x -= 1;
-//              err -= 2*x + 1;
-//          }
-//          }
 }
 
 void Uav::advance(int step)
@@ -164,7 +132,10 @@ void Uav::advance(int step)
     setRotation(rotation() + dx);
     setPos(mapToParent(0, -(3 + sin(speed) * 3)));
 
-
+    // scene parameters
+//    QPointF scene_center_mapped = mapFromScene(-500, -300);
+//    qreal scm_x = scene_center_mapped.x();
+//    qreal scm_y = scene_center_mapped.y();
 
 
 

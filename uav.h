@@ -15,6 +15,12 @@ public:
     QRectF boundingRect() const override;
 //    QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+    qreal uav_x;
+    qreal uav_y;
+    qreal uav_th;
+    QPointF uav_center_wrt_scene;
+
     bool pressed;
     QRectF footprintBound();
     qreal radius;
@@ -26,9 +32,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-    qreal uav_x;
-    qreal uav_y;
-    qreal uav_th;
+
 
         // from colliding mice
     qreal angle;

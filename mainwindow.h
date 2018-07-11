@@ -31,9 +31,11 @@ public:
     qreal scene_center_x;
     qreal scene_center_y;
 
-//private slots:
+private slots:
 
 //    void on_addRegion1_clicked();
+    void draw_bc(QGraphicsScene *scene);
+
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +50,7 @@ private:
     QVector<QGraphicsItem* > rlist;
 
     QTimer *timer;
+    QTimer *bc_timer;
 };
 
 #endif // MAINWINDOW_H
